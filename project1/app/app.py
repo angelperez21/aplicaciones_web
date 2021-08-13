@@ -29,12 +29,9 @@ def sign_up():
     return render_template('sign_up.html')
 
 
-
-@app.route('/restore')
-def restore():
-    """Ruta que devuelve el index."""
-    return render_template('restore.html', code='')
-
+@app.route('/search')
+def search():
+   return render_template('busqueda.html')
 
 @app.route('/validation', methods=['POST'])
 def validation():
@@ -110,7 +107,7 @@ def save_guy():
                 dt = datetime.now()
                 identifier = f"{dt.strftime('%d%m%Y%H%M%S')}{curp[0:10]}"
                 if guys_manaer.set_guy(folio=identifier, name=name, guardian=guardian, birthday=birthday, gender=gender, age=age, curp=curp):
-                    return render_template('register.html', folio=identifier)
+                    return render_template('busqueda.html', folio=identifier)
                 return "No created"
     except Exception:
         return Response(
