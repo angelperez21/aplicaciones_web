@@ -1,0 +1,41 @@
+body {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #0CB793;
+    background-image: url(../assets/background.png);
+    color: #384047;
+}
+
+.form-admin {
+    background: rgba(119, 114, 119, 0.466);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(92, 91, 91, 0.568);
+    color: #fffdfd8c;
+}
+
+.text-congrat {
+    color: #ffffff;
+}
+
+.ingresar {
+    background: #222a3f;
+    background-color: #ED4747;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 700 !important;
+    color: #ffffff;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.568);
+    transition: 0.5s ease-in;
+}
+
+.form-control {
+    background: rgba(0, 0, 0, .3);
+    border-style: none;
+    color: #ffffff;
+}
+
+.form-control::placeholder {
+    color: white;
+}

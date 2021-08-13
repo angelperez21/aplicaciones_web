@@ -1,0 +1,39 @@
+{% extends "mainTemplate.html" %} {% block title %}Registrarse{% endblock %} {% block content %}
+<div class="container">
+    <div class="row justify-content-center pt-2 mt-5 mr-1">
+        <div class="col-md-4 form-admin">
+            <form action="/insert_user" method="POST">
+                <div class="form-group text-center pt-3">
+                    <h1 class="text-congrat">Gracias por registrarse</h1>
+                </div>
+                <div class="form-group mx-sm-4 pt-2">
+                    <input type="text" class="form-control" placeholder="Usuario" name="user" required />
+                </div>
+                <div class="form-group mx-sm-4 pt-2">
+                    <input type="text" class="form-control" placeholder="Correo" name="email" required />
+                </div>
+                <div class="form-group mx-sm-4 pb-2">
+                    <input type="password" class="form-control" placeholder="Contraseña" name="passwd" required />
+                </div>
+                <div class="form-group mx-sm-4 pb-1">
+                    <input type="password" class="form-control" placeholder="Contraseña" name="passwd1" required />
+                </div>
+                {% if alert %}
+                <div class="alert alert-danger form-group mx-sm-4" role="alert ">
+                    {{alert}}
+                </div>
+                {% endif %}
+                <div class="form-group mx-sm-4 pb-3">
+                    <input type="submit" class="ingresar boton btn btn-block" value="Registrarse" />
+                </div>
+            </form>
+            <div class="text-center">
+                <a href="/" style="color: white">Iniciar Sesión</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- jQuery and Bootstrap Bundle (includes Popper) -->
+<script src="{{ url_for( 'static', filename='js/jquery/jquery-3.5.1.min.js' )}} "></script>
+<script src="{{ url_for( 'static', filename='js/bootstrap/bootstrap.bundle.min.js' )}} "></script>
+{% endblock %}

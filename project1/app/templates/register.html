@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primer ejemplo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1>
+            Registro
+        </h1>
+        <form action="/save_guy" method="POST">
+            <label for="nom">Nombre del niño completo</label><br><input type="text" name="nomb" id="nom"><br><br>
+            <label for="nom">Nombre del tutor completo</label><br><input type="text" name="nombTutor" id="nomTuto"><br><br>
+            <label for="start">Fecha de nacimiento del niño</label><br><input type="date" id="start" name="trip-start" min="1998-01-01" max="2018-12-31">
+            <p>Sexo:
+                <input type="radio" name="hm" value="h" required> Hombre
+                <input type="radio" name="hm" value="m"> Mujer
+            </p>
+
+            <label for="ed">Edad</label><br><input type="number" name="edad" id="ed"><br><br>
+
+            <label for="nom">CURP</label><br><input type="text" name="curp" id="cur"><br><br>
+            <input type="submit" value="Enviar">
+        </form>
+        <span>
+            ¿Ya tiene su registro?
+            <a href="">Veamos su información</a>
+        </span>
+    </div>
+</body>
+
+</html>
