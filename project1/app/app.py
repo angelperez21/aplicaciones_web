@@ -110,7 +110,7 @@ def save_guy():
                 dt = datetime.now()
                 identifier = f"{dt.strftime('%d%m%Y%H%M%S')}{curp[0:10]}"
                 if guys_manaer.set_guy(folio=identifier, name=name, guardian=guardian, birthday=birthday, gender=gender, age=age, curp=curp):
-                    return render_template('register.html',folio=identifier)
+                    return render_template('register.html', folio=identifier)
                 return "No created"
     except Exception:
         return Response(

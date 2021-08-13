@@ -1,0 +1,5 @@
+.project1/
+.mypy_cache/
+.vscode
+project1/app/__pycache__
+project1/.vscode
