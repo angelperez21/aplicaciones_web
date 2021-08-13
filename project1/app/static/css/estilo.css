@@ -24,7 +24,7 @@ form {
     padding: 10px 20px;
     background: #f4f7f8b9;
     border-radius: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 h1 {
@@ -79,7 +79,6 @@ textarea {
 }
 
 .container span {
-    margin-top: 15px;
     text-align: center;
     color: #e8eeef;
 }

@@ -7,9 +7,13 @@ from datetime import datetime
 from flask import Flask, request, Response, render_template
 
 from app.code.get_status import FAILED, OK
+from app.db.users import User
+from app.db.guys import Guy
 
 
 app = Flask(__name__)
+userManager = User()
+guys_manaer = Guy()
 
 
 @app.route('/')
@@ -19,7 +23,7 @@ def index():
 
 
 
-@app.route('/sing_up')
+@app.route('/sign_up')
 def sign_up():
     """Ruta que devuelve el index."""
     return render_template('sign_up.html')
@@ -104,25 +108,10 @@ def save_guy():
             curp = request.form['curp']
             if name and guardian and birthday and gender and age and curp:
                 dt = datetime.now()
-                identifier = dt.strftime('%d%m%Y%H%M%S')
-                return Response(
-                    json.dumps(
-                        {
-                            'mesagge': 'Aspirante creado',
-                            'aspirante': {
-                                '_id': f'{identifier}{curp[0:10]}',
-                                'name': name,
-                                'guardian': guardian,
-                                'birthday': birthday,
-                                'gender': gender,
-                                'age': age,
-                                'curp': curp,
-                                },
-                        },
-                    ),
-                    status=OK,
-                    mimetype='application/json',
-                )
+                identifier = f"{dt.strftime('%d%m%Y%H%M%S')}{curp[0:10]}"
+                if guys_manaer.set_guy(folio=identifier, name=name, guardian=guardian, birthday=birthday, gender=gender, age=age, curp=curp):
+                    return render_template('register.html',folio=identifier)
+                return "No created"
     except Exception:
         return Response(
                 json.dumps(

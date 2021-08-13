@@ -10,7 +10,7 @@ class Guy(Connection):
         super().__init__()
         self.collection_guys = self.db['guys']
 
-    def get_guys(self):
+    def get_guy(self):
         """Método para obtener todos los registros."""
         return self.collection_guys.find()
 
