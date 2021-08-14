@@ -8,41 +8,67 @@
 </head>
 
 <body>
-    <section class="form-login">
-        <form onsubmit="search()">
-            <h1>Busqueda de registros</h5>
-                {% if folio %}
-                <div class="folio_container">
-                    <p>
-                        Su registro se realizo correctamente su folio es:
-                    </p>
-                    <p style="font-weight: bold;">{{folio}}</p>
-                </div>
-                {% endif %}
-                <input class="controls" type="text" name="Folio" value="" placeholder="Folio visualizar sus datos" required>
-                <input class="buttons" style="margin-bottom: 30px;" type="submit" name="" value="Buscar">
-
-                <label style="margin-top: 20px;" for="nom">Nombre del niño completo</label><br>
-                <input type="text" name="nomb" id="nom" disabled><br>
-                <label for="nom">Nombre del tutor completo</label><br>
-                <input type="text" name="nombTutor" id="nomTuto" disabled><br>
-                <label for="start">Fecha de nacimiento del niño</label><br>
-                <input type="date" id="start" id="trip-start" name="trip-start" min="1998-01-01" max="2018-12-31" disabled>
-                <p>Sexo:
-                    <input type="radio" id="hm" name="hm" value="h" disabled> Hombre
-                    <input type="radio" id="hm" name="hm" value="m" disabled> Mujer
+    <div class="container_search">
+        <h1>Busqueda de registros</h5>
+            {% if folio %}
+            <div class="folio_container">
+                <p>
+                    Su registro se realizo correctamente su folio es:
                 </p>
-                <label for="ed">Edad</label><br>
-                <input type="number" name="edad" id="ed" min="3" max="6" disabled><br>
-                <label for="nom">CURP</label><br>
-                <input type="text" name="curp" id="curp" disabled><br>
-        </form>
-    </section>
+                <p style="font-weight: bold;">{{folio}}</p>
+            </div>
+            {% endif %}
+            <input class="controls" type="text" name="folio" id="folio" placeholder="Folio visualizar sus datos" required>
+            <input class="buttons" style="margin-bottom: 30px;" type="submit" onclick="search()" value="Buscar">
 
-    <script src="{{ url_for( 'static', filename='js/jquery/jquery-3.5.1.min.js' )}} "></script>
+            <label style="margin-top: 20px;" for="nom">Nombre del niño completo</label><br>
+            <input type="text" name="nomb" id="nom" disabled><br>
+            <label for="nom">Nombre del tutor completo</label><br>
+            <input type="text" name="nombTutor" id="nomTuto" disabled><br>
+            <label for="start">Fecha de nacimiento del niño</label><br>
+            <input type="text" id="trip-start" name="trip-start" disabled>
+            <label for="ed">Sexo</label><br>
+            <input type="text" name="edad" id="hm" disabled><br>
+            <label for="ed">Edad</label><br>
+            <input type="text" name="edad" id="age" disabled><br>
+            <label for="nom">CURP</label><br>
+            <input type="text" name="curp" id="curp" style="margin-bottom: 15px;" disabled><br>
+
+            <a href="/">Vuelve a iniciar sesión para realzar el registro</a>
+    </div>
+
+    <script src="{{ url_for( 'static', filename='js/jquery-3.5.1.min.js' )}} "></script>
     <script>
         function search() {
-            console.log("Hola");
+            var folio = document.getElementById('folio').value;
+            find_guy(folio);
+        }
+
+        function find_guy(folio) {
+            $.ajax({
+                url: "/search_guy",
+                type: 'POST',
+                data: JSON.stringify({
+                    folio: folio,
+                }),
+                contentType: "application/json",
+                success: function(response) {
+                    set_data(response);
+                },
+                error: function() {
+                    alert("El folio no se encuentra en el regitro, se le hace la invitación que que registre a su niño.");
+                }
+            });
+        }
+
+        function set_data(data) {
+            var guy = data.guy;
+            document.getElementById('nom').value = guy[0].name;
+            document.getElementById('nomTuto').value = guy[0].guardian;
+            document.getElementById('trip-start').value = guy[0].birthday;
+            document.getElementById('hm').value = guy[0].gender;
+            document.getElementById('age').value = guy[0].age;
+            document.getElementById('curp').value = guy[0].curp;
         }
     </script>
 </body>

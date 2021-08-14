@@ -18,8 +18,9 @@ body {
     color: #384047;
 }
 
-form {
-    max-width: 300px;
+form,
+.container_search {
+    max-width: 400px;
     margin: auto;
     padding: 10px 20px;
     background: #f4f7f8b9;
@@ -29,7 +30,6 @@ form {
 
 h1 {
     text-align: center;
-    color: #e2f5f8;
 }
 
 input[type="submit"],
@@ -82,4 +82,15 @@ textarea {
 .container span {
     text-align: center;
     color: #e8eeef;
+}
+
+.folio_container {
+    font-family: 'Poppins', sans-serif;
+    color: #384047;
+}
+
+.container_search {
+    text-align: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
 }

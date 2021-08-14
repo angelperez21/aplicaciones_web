@@ -10,9 +10,15 @@ class Guy(Connection):
         super().__init__()
         self.collection_guys = self.db['guys']
 
-    def get_guy(self):
-        """Método para obtener todos los registros."""
+
+    def get_guys(self):
         return self.collection_guys.find()
+
+    def get_guy(self, folio):
+        try:
+            return self.collection_guys.find({"_id": folio})
+        except Exception:
+            return None
 
     def set_guy(self, folio, name, guardian, birthday, gender, age, curp):
         """Método para guardar registro de niño"""

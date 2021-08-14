@@ -17,6 +17,11 @@
         <h1>
             Registro
         </h1>
+        { % if alert % }
+        <h2>
+            {{alert}}
+        </h2>
+        { % endif % }
         <form action="/save_guy" method="POST">
             <label for="nom">Nombre del niño completo</label><br>
             <input type="text" name="nomb" id="nom" required><br>
@@ -25,8 +30,8 @@
             <label for="start">Fecha de nacimiento del niño</label><br>
             <input type="date" id="start" id="trip-start" name="trip-start" min="1998-01-01" max="2018-12-31" required>
             <p>Sexo:
-                <input type="radio" id="hm" name="hm" value="h" required> Hombre
-                <input type="radio" id="hm" name="hm" value="m"> Mujer
+                <input type="radio" id="hm" name="hm" value="masculino" required> Masculino
+                <input type="radio" id="hm" name="hm" value="femenino"> Femenino
             </p>
             <label for="ed">Edad</label><br>
             <input type="number" name="edad" id="ed" min="3" max="6" required><br>

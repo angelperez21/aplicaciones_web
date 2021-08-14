@@ -3,3 +3,5 @@
 .vscode
 project1/app/__pycache__
 project1/.vscode
+project1/app/db/__pycache__
+project1/app/__pycache__

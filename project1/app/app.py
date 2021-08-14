@@ -13,7 +13,7 @@ from app.db.guys import Guy
 
 app = Flask(__name__)
 userManager = User()
-guys_manaer = Guy()
+guys_manager = Guy()
 
 
 @app.route('/')
@@ -105,10 +105,14 @@ def save_guy():
             curp = request.form['curp']
             if name and guardian and birthday and gender and age and curp:
                 dt = datetime.now()
-                identifier = f"{dt.strftime('%d%m%Y%H%M%S')}{curp[0:10]}"
-                if guys_manaer.set_guy(folio=identifier, name=name, guardian=guardian, birthday=birthday, gender=gender, age=age, curp=curp):
-                    return render_template('busqueda.html', folio=identifier)
-                return "No created"
+                identifier = f"{dt.strftime('%d%m%Y%')}{curp[0:10]}"
+                guy = guys_manager.get_guy(identifier)
+                guys = guys_manager.get_guys()
+                if len(guys) < 50:
+                    if guy == 0:
+                        if guys_manager.set_guy(folio=identifier, name=name, guardian=guardian, birthday=birthday, gender=gender, age=age, curp=curp):
+                            return render_template('busqueda.html', folio=identifier)
+                return render_template('register.html', alert='Cupo lleno')
     except Exception:
         return Response(
                 json.dumps(
@@ -119,3 +123,33 @@ def save_guy():
                 status=FAILED,
                 mimetype='application/json',
             )
+
+
+@app.route('/search_guy', methods=['POST'])
+def search_guy():
+    """Ruta para realizar el registro en la DB de MongoDB
+    Returns:
+    return a dict
+    """
+    if request.method == 'POST':
+        folio = request.json.get('folio')
+        guy = json_util.loads(json_util.dumps(guys_manager.get_guy(folio)))
+        if guy:
+            return Response(
+                json.dumps(
+                    {
+                        'guy': guy,
+                    },
+                ),
+                status=OK,
+                mimetype='application/json',
+            )
+        return Response(
+                    json.dumps(
+                        {
+                            'guy': [],
+                        },
+                    ),
+                    status=FAILED,
+                    mimetype='application/json',
+                )
