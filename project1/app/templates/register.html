@@ -17,11 +17,11 @@
         <h1>
             Registro
         </h1>
-        { % if alert % }
+        {% if alert %}
         <h2>
             {{alert}}
         </h2>
-        { % endif % }
+        {% endif %}
         <form action="/save_guy" method="POST">
             <label for="nom">Nombre del niño completo</label><br>
             <input type="text" name="nomb" id="nom" required><br>

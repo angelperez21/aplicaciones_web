@@ -105,15 +105,16 @@ def save_guy():
             curp = request.form['curp']
             if name and guardian and birthday and gender and age and curp:
                 dt = datetime.now()
-                identifier = f"{dt.strftime('%d%m%Y%')}{curp[0:10]}"
-                guy = guys_manager.get_guy(identifier)
-                guys = guys_manager.get_guys()
-                if len(guys) < 50:
-                    if guy == 0:
+                identifier = f"{dt.strftime('%d%m%Y')}{curp[0:10]}"
+                guy = json_util.loads(json_util.dumps(guys_manager.get_guy(identifier)))
+                guys = json_util.loads(json_util.dumps(guys_manager.get_guys()))
+                if len(guys) <=  50:
+                    if len(guy) == 0:
                         if guys_manager.set_guy(folio=identifier, name=name, guardian=guardian, birthday=birthday, gender=gender, age=age, curp=curp):
                             return render_template('busqueda.html', folio=identifier)
                 return render_template('register.html', alert='Cupo lleno')
-    except Exception:
+    except Exception as e:
+        print(f'Error {e}')
         return Response(
                 json.dumps(
                     {
