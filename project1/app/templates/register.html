@@ -25,25 +25,45 @@
         <form action="/save_guy" method="POST">
             <label for="nom">Nombre del niño completo</label><br>
             <input type="text" name="nomb" id="nom" required><br>
-            <label for="nom">Nombre del tutor completo</label><br>
+
+            <label for="nombTutor">Nombre del tutor completo</label><br>
             <input type="text" name="nombTutor" id="nomTuto" required><br>
+
             <label for="start">Fecha de nacimiento del niño</label><br>
             <input type="date" id="start" id="trip-start" name="trip-start" min="1998-01-01" max="2018-12-31" required>
+
             <p>Sexo:
                 <input type="radio" id="hm" name="hm" value="masculino" required> Masculino
                 <input type="radio" id="hm" name="hm" value="femenino"> Femenino
             </p>
+
             <label for="ed">Edad</label><br>
             <input type="number" name="edad" id="ed" min="3" max="6" required><br>
-            <label for="nom">CURP</label><br>
+
+            <label for="curp">CURP</label><br>
             <input type="text" name="curp" id="curp" required><br>
+
+            <label for="grade">Grado a cursar</label><br>
+            <input type="text" name="grade" id="grade" required><br>
+
+            <label for="email">Correo electronico de contacto</label><br>
+            <input type="text" name="email" id="email" required><br>
+
+            <label for="dir">Domicilio</label><br>
+            <input type="text" name="dir" id="dir" required><br>
+
+            <label for="tel">Teléfono 1</label><br>
+            <input type="text" name="tel" id="tel" required><br>
+
+            <label for="tel2">Teléfono 2</label><br>
+            <input type="text" name="tel2" id="tel2"><br>
+
             <input type="submit" value="Enviar">
         </form>
         <span>
             ¿Ya tiene su registro?
             <a href="/search">Veamos su información</a>
             <br><a href="/">Cerrar sesión</a>
-
         </span>
     </div>
 </body>

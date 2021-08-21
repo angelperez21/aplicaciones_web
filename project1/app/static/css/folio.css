@@ -1,0 +1,15 @@
+body {
+    background-color: #f1f4f7;
+}
+
+.container {
+    max-width: 80%;
+    text-align: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    margin: 0 auto;
+}
+
+.text {
+    display: inline;
+}

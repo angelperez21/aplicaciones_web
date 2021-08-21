@@ -14,7 +14,7 @@ body {
     background-attachment: fixed;
     background-size: cover;
     background-color: #0CB793;
-    background-image: url(../assets/background.png);
+    background-image: url(../assets/images/kinder1.jpg);
     color: #384047;
 }
 
@@ -23,7 +23,8 @@ form,
     max-width: 400px;
     margin: auto;
     padding: 10px 20px;
-    background: #f4f7f8b9;
+    background: #d5d6d6b9;
+    box-shadow: 10px;
     border-radius: 10px;
     margin-bottom: 10px;
 }
@@ -81,7 +82,7 @@ textarea {
 
 .container span {
     text-align: center;
-    color: #e8eeef;
+    color: #a6a8a9;
 }
 
 .folio_container {

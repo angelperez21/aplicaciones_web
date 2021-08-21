@@ -18,21 +18,47 @@
                 <p style="font-weight: bold;">{{folio}}</p>
             </div>
             {% endif %}
-            <input class="controls" type="text" name="folio" id="folio" placeholder="Folio visualizar sus datos" required>
             <input class="buttons" style="margin-bottom: 30px;" type="submit" onclick="search()" value="Buscar">
 
-            <label style="margin-top: 20px;" for="nom">Nombre del niño completo</label><br>
-            <input type="text" name="nomb" id="nom" disabled><br>
-            <label for="nom">Nombre del tutor completo</label><br>
-            <input type="text" name="nombTutor" id="nomTuto" disabled><br>
-            <label for="start">Fecha de nacimiento del niño</label><br>
-            <input type="text" id="trip-start" name="trip-start" disabled>
-            <label for="ed">Sexo</label><br>
-            <input type="text" name="edad" id="hm" disabled><br>
-            <label for="ed">Edad</label><br>
-            <input type="text" name="edad" id="age" disabled><br>
-            <label for="nom">CURP</label><br>
-            <input type="text" name="curp" id="curp" style="margin-bottom: 15px;" disabled><br>
+            <form action="/update_guy" method="post">
+                <label style="margin-top: 20px;" for="nom">Folio para buscar al niño</label><br>
+                <input class="controls" type="text" name="folio" id="folio" placeholder="Folio visualizar sus datos" required> <br>
+                <label style="margin-top: 20px;" for="nom">Nombre del niño completo</label><br>
+                <input type="text" name="nomb" id="nom"><br>
+
+                <label for="nom">Nombre del tutor completo</label><br>
+                <input type="text" name="nombTutor" id="nomTuto"><br>
+
+                <label for="start">Fecha de nacimiento del niño</label><br>
+                <input type="text" id="trip-start" name="trip-start">
+
+                <label for="ed">Sexo</label><br>
+                <input type="text" name="edad" id="hm"><br>
+
+                <label for="ed">Edad</label><br>
+                <input type="text" name="edad" id="age"><br>
+
+                <label for="nom">CURP</label><br>
+                <input type="text" name="curp" id="curp" style="margin-bottom: 15px;"><br>
+
+                <label for="grade">Grado a cursar</label><br>
+                <input type="text" name="grade" id="grade" required><br>
+
+                <label for="email">Correo electronico de contacto</label><br>
+                <input type="text" name="email" id="email" required><br>
+
+                <label for="dir">Domicilio</label><br>
+                <input type="text" name="dir" id="dir" required><br>
+
+                <label for="tel">Teléfono 1</label><br>
+                <input type="text" name="tel" id="tel" required><br>
+
+                <label for="tel2">Teléfono 2</label><br>
+                <input type="text" name="tel2" id="tel2"><br>
+
+                <input type="submit" value="Actualizar datos">
+
+            </form>
 
             <a href="/">Vuelve a iniciar sesión para realzar el registro</a>
     </div>
@@ -63,12 +89,22 @@
 
         function set_data(data) {
             var guy = data.guy;
+            var telephone = guy[0].telephone;
+            var tel2 = ' ';
+            if (telephone.length == 2) {
+                tel2 = telephone[1]
+            }
             document.getElementById('nom').value = guy[0].name;
             document.getElementById('nomTuto').value = guy[0].guardian;
             document.getElementById('trip-start').value = guy[0].birthday;
             document.getElementById('hm').value = guy[0].gender;
             document.getElementById('age').value = guy[0].age;
             document.getElementById('curp').value = guy[0].curp;
+            document.getElementById('grade').value = guy[0].grade;
+            document.getElementById('email').value = guy[0].email;
+            document.getElementById('dir').value = guy[0].address;
+            document.getElementById('tel').value = guy[0].telephone[0];
+            document.getElementById('tel2').value = tel2;
         }
     </script>
 </body>

@@ -10,7 +10,6 @@ class Guy(Connection):
         super().__init__()
         self.collection_guys = self.db['guys']
 
-
     def get_guys(self):
         return self.collection_guys.find()
 
@@ -20,9 +19,13 @@ class Guy(Connection):
         except Exception:
             return None
 
-    def set_guy(self, folio, name, guardian, birthday, gender, age, curp):
+    def set_guy(self, folio, name, guardian, birthday, gender, age, curp, grade, email, addrees, tel, tel2):
         """Método para guardar registro de niño"""
         try:
+            telephone = []
+            telephone.append(tel)
+            if len(tel2) != 0:
+                telephone.append(tel2)
             self.collection_guys.insert_one(
                 {
                     '_id': folio,
@@ -32,9 +35,12 @@ class Guy(Connection):
                     'gender': gender,
                     'age': age,
                     'curp': curp,
+                    'grade': grade,
+                    'email': email,
+                    'address': addrees,
+                    'telephone': telephone,
                 },
             )
             return True
         except Exception:
             return False
-            

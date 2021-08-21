@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/folio.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="folio">
+            <h1>
+                Jardin de niños "MIS PRIMERAS LETRAS"
+            </h1>
+            <h2>
+                El registro ha sido exitoso con folio:
+            </h2>
+            <h3>
+                {{folio}}
+            </h3>
+            <p>
+                Nombre del aspirante: {{name}}
+                <br> Nombre del tutor: {{tutor}}
+                <br> Fecha de nacimiento: {{date}}
+                <br> Sexo: {{genere}}
+                <br> Edad: {{age}}
+                <br> CURP: {{curp}}
+            </p>
+            <img src="{{ url_for('static',  filename='assets/images/kinder1.png' ) }}" alt="together">
+            <div class="text">
+                <p>
+                    Le agradecemos se haya registrado en nuestra institución,
+                    <br> si desea consultar o corregir los datos ingresados,
+                    <br> por favor inicie sesión y realice los cambio necesarios
+                    <br>en el apartado de busqueda
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

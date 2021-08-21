@@ -1,0 +1,9 @@
+body {
+    background-color: blanchedalmond;
+}
+
+.navbar {
+    display: inline;
+    height: 100px;
+    background-color: aliceblues;
+}

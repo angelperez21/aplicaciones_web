@@ -1,10 +1,13 @@
 """Modulo en donde se desarrolla el servidor."""
 
 import json
+import logging
 
 from bson import json_util
 from datetime import datetime
 from flask import Flask, request, Response, render_template
+from flask_weasyprint import HTML, render_pdf
+
 
 from app.code.get_status import FAILED, OK
 from app.db.users import User
@@ -14,6 +17,8 @@ from app.db.guys import Guy
 app = Flask(__name__)
 userManager = User()
 guys_manager = Guy()
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 @app.route('/')
@@ -21,6 +26,11 @@ def index():
     """Ruta que devuelve el index."""
     return render_template('index.html')
 
+
+@app.route('/login')
+def login():
+    """Ruta que devuelve el index."""
+    return render_template('login.html')
 
 
 @app.route('/sign_up')
@@ -31,7 +41,13 @@ def sign_up():
 
 @app.route('/search')
 def search():
-   return render_template('busqueda.html')
+    return render_template('busqueda.html')
+
+
+@app.route('/folio')
+def folio():
+    return render_template('folio.html')
+
 
 @app.route('/validation', methods=['POST'])
 def validation():
@@ -62,7 +78,7 @@ def validation():
                 ),
                 status=FAILED,
                 mimetype='application/json',
-            )
+        )
 
 
 @app.route('/insert_user', methods=['POST'])
@@ -103,18 +119,51 @@ def save_guy():
             gender = request.form['hm']
             age = request.form['edad']
             curp = request.form['curp']
-            if name and guardian and birthday and gender and age and curp:
+            grade = request.form['grade']
+            email = request.form['email']
+            addrees = request.form['dir']
+            tel = request.form['tel']
+            tel2 = request.form['tel2']
+            if name and guardian and birthday and gender and age and curp and grade and email and addrees and tel:
                 dt = datetime.now()
-                identifier = f"{dt.strftime('%d%m%Y')}{curp[0:10]}"
+                identifier = f"{dt.strftime('%Y')}{curp[0:10]}"
                 guy = json_util.loads(json_util.dumps(guys_manager.get_guy(identifier)))
                 guys = json_util.loads(json_util.dumps(guys_manager.get_guys()))
-                if len(guys) <=  50:
+                print(len(guys))
+                print(len(guy))
+                if len(guys) <= 50:
                     if len(guy) == 0:
-                        if guys_manager.set_guy(folio=identifier, name=name, guardian=guardian, birthday=birthday, gender=gender, age=age, curp=curp):
-                            return render_template('busqueda.html', folio=identifier)
-                return render_template('register.html', alert='Cupo lleno')
+                        html = render_template(
+                            'folio.html',
+                            folio=identifier,
+                            name=name,
+                            tutor=guardian,
+                            date=birthday,
+                            genere=gender,
+                            age=age,
+                            curp=curp
+                            )
+                        if guys_manager.set_guy(
+                            folio=identifier,
+                            name=name,
+                            guardian=guardian,
+                            birthday=birthday,
+                            gender=gender,
+                            age=age,
+                            curp=curp,
+                            grade=grade,
+                            email=email,
+                            addrees=addrees,
+                            tel=tel,
+                            tel2=tel2,
+                        ):
+                            return render_pdf(HTML(string=html))
+                    else:
+                        return render_template('register.html', alert='El niño ya se encuentra registrado')
+                else:
+                    return render_template('register.html', alert='Cupo lleno')
     except Exception as e:
-        print(f'Error {e}')
+        logger.exception(e)
         return Response(
                 json.dumps(
                     {
@@ -154,3 +203,8 @@ def search_guy():
                     status=FAILED,
                     mimetype='application/json',
                 )
+
+
+@app.route('/update_guy', methods=['POST'])
+def update_guy():
+    pass
