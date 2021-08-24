@@ -126,7 +126,7 @@ def save_guy():
             tel2 = request.form['tel2']
             if name and guardian and birthday and gender and age and curp and grade and email and addrees and tel:
                 dt = datetime.now()
-                identifier = f"{dt.strftime('%Y')}{curp[0:10]}"
+                identifier = f"{dt.strftime('%Y%m')}{curp[4:10]}{curp[0:4]}"
                 guy = json_util.loads(json_util.dumps(guys_manager.get_guy(identifier)))
                 guys = json_util.loads(json_util.dumps(guys_manager.get_guys()))
                 print(len(guys))
@@ -141,8 +141,14 @@ def save_guy():
                             date=birthday,
                             genere=gender,
                             age=age,
-                            curp=curp
-                            )
+                            curp=curp,
+                            grade=grade,
+                            email=email,
+                            addrees=addrees,
+                            tel=tel,
+                            tel2=tel2,
+                            alert="Registro exitoso con folio:"
+                        )
                         if guys_manager.set_guy(
                             folio=identifier,
                             name=name,
@@ -207,4 +213,54 @@ def search_guy():
 
 @app.route('/update_guy', methods=['POST'])
 def update_guy():
-    pass
+    if request.method == 'POST':
+        folio = request.form['folio']
+        name = request.form['nomb']
+        guardian = request.form['nombTutor']
+        birthday = request.form['trip-start']
+        gender = request.form['hm']
+        age = request.form['edad']
+        curp = request.form['curp']
+        grade = request.form['grade']
+        email = request.form['email']
+        addrees = request.form['dir']
+        tel = request.form['tel']
+        tel2 = request.form['tel2']
+        if folio and name and guardian and birthday and gender and age and curp and grade and email and addrees and tel:
+            html = render_template(
+                        'folio.html',
+                        folio=folio,
+                        name=name,
+                        tutor=guardian,
+                        date=birthday,
+                        genere=gender,
+                        age=age,
+                        curp=curp,
+                        grade=grade,
+                        email=email,
+                        addrees=addrees,
+                        tel=tel,
+                        tel2=tel2,
+                        alert="Datos actualizados correctamente")
+            if guys_manager.update_guy(
+                folio=folio,
+                name=name,
+                guardian=guardian,
+                birthday=birthday,
+                gender=gender,
+                age=age, curp=curp,
+                grade=grade,
+                email=email,
+                addrees=addrees,
+                tel=tel,
+                tel2=tel2):
+                return render_pdf(HTML(string=html))
+        return Response(
+            json.dumps(
+                {
+                    'message': 'No created, incorrect data body',
+                },
+            ),
+                status=FAILED,
+                mimetype='application/json',
+            )

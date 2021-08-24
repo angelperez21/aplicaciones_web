@@ -19,20 +19,25 @@
                 Jardin de niños "MIS PRIMERAS LETRAS"
             </h1>
             <h2>
-                El registro ha sido exitoso con folio:
+                {{alert}}
             </h2>
             <h3>
                 {{folio}}
             </h3>
-            <p>
+            <p style="font-size: 15px;">
                 Nombre del aspirante: {{name}}
                 <br> Nombre del tutor: {{tutor}}
                 <br> Fecha de nacimiento: {{date}}
                 <br> Sexo: {{genere}}
                 <br> Edad: {{age}}
                 <br> CURP: {{curp}}
+                <br> Grado: {{grade}}
+                <br> Correo electronico: {{email}}
+                <br> Domicilio: {{addrees}}
+                <br> Telefono: {{tel}}
+                <br>Telefono 2: {{tel2}}
             </p>
-            <img src="{{ url_for('static',  filename='assets/images/kinder1.png' ) }}" alt="together">
+            <img style="height: 150px;" src="{{ url_for('static',  filename='assets/images/kinder1.png' ) }}" alt="together">
             <div class="text">
                 <p>
                     Le agradecemos se haya registrado en nuestra institución,

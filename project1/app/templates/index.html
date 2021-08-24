@@ -4,153 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title></title>
-    <style type="text/css">
-        @keyframes slide {
-            0% {
-                transform: translateX(0);
-            }
-            10% {
-                transform: translateX(0);
-            }
-            15% {
-                transform: translateX(-100%);
-            }
-            30% {
-                transform: translateX(-100%);
-            }
-            35% {
-                transform: translateX(-200%);
-            }
-            50% {
-                transform: translateX(-200%);
-            }
-            55% {
-                transform: translateX(-300%);
-            }
-            70% {
-                transform: translateX(-300%);
-            }
-            75% {
-                transform: translateX(-400%);
-            }
-            90% {
-                transform: translateX(-400%);
-            }
-            95% {
-                transform: translateX(-500%);
-            }
-            100% {
-                transform: translateX(-500%);
-            }
-        }
-        
-        * {
-            box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: sans-serif;
-        }
-        
-        .wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .slider {
-            position: relative;
-        }
-        
-        .slides {
-            position: relative;
-            display: flex;
-            overflow: hidden;
-        }
-        
-        .slide {
-            width: 100vw;
-            flex-shrink: 0;
-            animation-name: slide;
-            animation-duration: 20s;
-            animation-iteration-count: infinite;
-            animation-timing-function: linear;
-        }
-        
-        .slides:hover .slide {
-            animation-play-state: paused;
-        }
-        
-        .slide img {
-            width: 100%;
-            vertical-align: top;
-        }
-        
-        .slide a {
-            width: 100%;
-            display: inline-block;
-            position: relative;
-        }
-        
-        .caption {
-            color: white;
-            text-shadow: 1px 1px black;
-            font-size: 8vw;
-            position: absolute;
-            bottom: 8vw;
-            right: 4vw;
-        }
-        
-        .slide:target {
-            animation-name: none;
-            position: absolute;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 50;
-        }
-        
-        .slider-controler {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            text-align: center;
-            padding: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 100;
-        }
-        
-        .slider-controler li {
-            margin: 0 0.5rem;
-            display: inline-block;
-            vertical-align: top;
-        }
-        
-        .slider-controler a {
-            display: inline-block;
-            vertical-align: top;
-            text-decoration: none;
-            color: white;
-            font-size: 1.5rem;
-        }
-        
-        @media only screen and (min-width: 1200px) {
-            .slide {
-                width: 1200px;
-            }
-            .caption {
-                font-size: 96px;
-                bottom: 96px;
-                right: 50px;
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -160,26 +14,35 @@
         <h2 class="logo">MIS PRIMERAS LETRAS</h2>
         <input type="checkbox" id="chk">
         <label for="chk" class="show-menu-btn">
-            <i class="fas fa-ellipsis-h"></i>
-        </label>
+      <i class="fas fa-ellipsis-h"></i>
+    </label>
 
         <ul class="menu">
-            <a href="/login">Iniciar sesion </a>
-            <a href="/sign_up">Registrarse</a>
-            <a href="">Direccion</a>
-            <a href="">Contacto</a>
-            <a href="">OFERTA EDUCATIVA</a>
-            <!-- start menu desplegable -->
-            <ul>
-                <li><a href="#">Enlace 2.1</a></li>
-                <li><a href="#">Enlace 2.2</a></li>
-                <li><a href="#">Enlace 2.3</a></li>
-            </ul>
+            <li><a href="/login">Iniciar sesion </a></li>
+            <li><a href="/sign_up">Registrarse</a></li>
+            <li><a href="#">Direccion</a></li>
+            <li><a href="#">Contacto</a></li>
+            <li><a href="#">OFERTA EDUCATIVA</a>
+                <!-- start menu desplegable -->
+                <ul>
+                    <li><a href="#">Inglés</a></li>
+                    <li><a href="#">Español</a></li>
+                    <li><a href="#">Música</a></li>
+                    <li><a href="#">arte</a></li>
+                    <li><a href="#">neuromotor</a></li>
+                    <li><a href="#">Talleres extracurriculares</a>
+                        <ul>
+                            <li><a href="#">Natación</a></li>
+                            <li><a href="#">fútbol</a></li>
+                            <li><a href="#">ballet</a></li>
+
+                    </li>
+                    </ul>
             </li>
             <label for="chk" class="hide-menu-btn">
-                <i class="fas fa-times"></i>
-            </label>
-        </ul>
+        <i class="fas fa-times"></i>
+      </label>
+            </ul>
     </div>
 
 
@@ -217,22 +80,22 @@
                 </li>
                 <li class="slide" id="slide3">
                     <a href="#">
-                        <img src="{{ url_for('static', filename='assets/images/photo3.jpeg') }} alt=" photo 3">
+                        <img src="{{ url_for('static', filename='assets/images/photo3.jpeg') }}" alt="photo 3">
                     </a>
                 </li>
                 <li class="slide" id="slide4">
                     <a href="#">
-                        <img src="{{ url_for('static', filename='assets/images/photo4.jpeg') }} alt=" photo 4">
+                        <img src="{{ url_for('static', filename='assets/images/photo4.jpeg') }}" alt="photo 4">
                     </a>
                 </li>
                 <li class="slide" id="slide5">
                     <a href="#">
-                        <img src="{{ url_for('static', filename='assets/images/photo5.jpeg') }} alt=" photo 5">
+                        <img src="{{ url_for('static', filename='assets/images/photo5.jpeg') }}" alt="photo 5">
                     </a>
                 </li>
                 <li class="slide">
                     <a href="#">
-                        <img src="{{ url_for('static', filename='assets/images/photo1.jpeg') }} alt=" photo 1">
+                        <img src="{{ url_for('static', filename='assets/images/photo1.jpeg') }}" alt="photo 1">
                     </a>
                 </li>
             </ul>
@@ -262,9 +125,10 @@
                             <BR> DIRECCION
                             <p>
 
-                                <p> --Dirección-- </p>
+                                <p> Jhbsusbsabkbxaxbakxab</p>
                                 <br>
                                 <i class="fas fa-map-marker-alt" id="localizacion"></i>
+                                <span class="titulo-colonia"> Puebla, Puebla </span>
 
                             </p>
 
@@ -286,7 +150,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <p class="titulo-footer">
-                        Copyright 2021 Todos los derechos reservados |
+                        Copyright 02020 Todos los derechos reservados |
+                        <span class="span-subtitulo"> BUAP </span>
 
                     </p>
 
@@ -295,7 +160,12 @@
             </div>
 
         </div>
+
+
     </div>
+
+
+
 </body>
 
 </html>
